@@ -19,7 +19,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '2.4.11'  # или другая версия Python, которую вы используете
+        python-version: '3.11.9'  # или другая версия Python, которую вы используете
 
     - name: Install dependencies
       run: |
