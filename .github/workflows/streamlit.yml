@@ -1,32 +1,23 @@
-name: Streamlit App Deployment
+name: Streamlit app
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
 
+permissions:
+  contents: read
 
 jobs:
-  deploy:
+  streamlit:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.11.9'  # или другая версия Python, которую вы используете
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Run Streamlit app
-      run: |
-        streamlit run streamlit_app.py 
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.9'
+      - uses: streamlit/streamlit-app-action@v0.0.3
+        with:
+          app-path: streamlit_app.py
+          ruff: true
